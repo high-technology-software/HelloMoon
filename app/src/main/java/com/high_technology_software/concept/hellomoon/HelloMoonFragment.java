@@ -11,7 +11,7 @@ import android.widget.Button;
 public class HelloMoonFragment extends Fragment {
 
     private AudioPlayer mPlayer = new AudioPlayer();
-    private Button mPlayButton;
+    private IntelligentButton mButton;
     private Button mStopButton;
 
     @Nullable
@@ -19,11 +19,12 @@ public class HelloMoonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_hello_moon, parent, false);
 
-        mPlayButton = (Button) v.findViewById(R.id.hellomoon_playButton);
+        Button mPlayButton = (Button) v.findViewById(R.id.hellomoon_playButton);
+        mButton = new IntelligentButton(mPlayButton, getActivity(), mPlayer);
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPlayer.play(getActivity());
+                mButton.click();
             }
         });
 
@@ -32,6 +33,7 @@ public class HelloMoonFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mPlayer.stop();
+                mButton.reset();
             }
         });
 

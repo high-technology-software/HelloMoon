@@ -28,4 +28,12 @@ public class AudioPlayer {
 
         mPlayer.start();
     }
+
+    public void pause(){
+        mPlayer.pause();
+    }
+
+    public void resume() {
+        mPlayer.start();
+    }
 }
