@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 
 public class AudioPlayer {
 
-    private MediaPlayer mPlayer;
+    protected MediaPlayer mPlayer;
 
     public void stop() {
         if (mPlayer != null) {
@@ -17,7 +17,7 @@ public class AudioPlayer {
     public void play(Context c) {
         stop();
 
-        mPlayer = MediaPlayer.create(c, R.raw.one_small_step);
+        mPlayer = MediaPlayer.create(c, R.raw.apollo_17_stroll);
 
         mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override

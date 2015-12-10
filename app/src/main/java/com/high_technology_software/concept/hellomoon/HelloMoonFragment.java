@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HelloMoonFragment extends Fragment {
 
-    private AudioPlayer mPlayer = new AudioPlayer();
+    private VideoPlayerSolution mPlayer;
     private Button mPlayButton;
     private Button mStopButton;
 
@@ -18,12 +19,14 @@ public class HelloMoonFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_hello_moon, parent, false);
+        final SurfaceView surfaceView = (SurfaceView)v.findViewById(R.id.hellomoon_videoSurfaceView);
+        mPlayer = new VideoPlayerSolution(getActivity(), surfaceView.getHolder());
 
         mPlayButton = (Button) v.findViewById(R.id.hellomoon_playButton);
         mPlayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPlayer.play(getActivity());
+                mPlayer.playVideo(R.raw.apollo_17_stroll);
             }
         });
 
@@ -31,7 +34,7 @@ public class HelloMoonFragment extends Fragment {
         mStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPlayer.stop();
+                mPlayer.stopVideo();
             }
         });
 
@@ -41,6 +44,6 @@ public class HelloMoonFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPlayer.stop();
+        mPlayer.stopVideo();
     }
 }
